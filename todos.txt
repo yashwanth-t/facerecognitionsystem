@@ -1,0 +1,12 @@
+Stage 1:
+0) Calculate blur and set threshold value to 0.4
+1) Pickle the labels
+2) Use predict prob to get the confidence and then choose the corresponding label
+3) Determine accuracy manually
+
+Stage 2:
+1) Divide SVMs into n individual models
+2) Save n labels to determine accuracy
+
+Stage 3:
+1) Compare accuracies and results

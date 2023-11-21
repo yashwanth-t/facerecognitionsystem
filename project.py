@@ -43,7 +43,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'train':
     print('Training data extracted.')
 
     # Train SVM
-    svm_model = SVC(kernel='linear', probability=True)
+    svm_model = SVC(C = 100, kernel = 'linear', probability = True, decision_function_shape = 'ovo')
     svm_model.fit(X_train, y_train)
 
     print('SVM trained.')
