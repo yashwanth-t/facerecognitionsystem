@@ -77,17 +77,21 @@ width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = cap.get(cv2.CAP_PROP_FPS)
 
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
+fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 out = cv2.VideoWriter('output_video.mp4', fourcc, fps, (width,height))
 
 print(f'Processing test video: {test_video_path}...')
 
+skip_frames = 30
+frame_count = 0
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
         break
-    frame = predict_and_draw(frame, svm_model)
+    if frame_count % skip_frames == 0:
+        frame = predict_and_draw(frame, svm_model)
     out.write(frame)
+    frame_count += 1
 
 print('Test video processed.')
 
