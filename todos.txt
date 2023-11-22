@@ -1,12 +1,13 @@
 Stage 1:
-0) Calculate blur and set threshold value to 0.4
-1) Pickle the labels
-2) Use predict prob to get the confidence and then choose the corresponding label
-3) Determine accuracy manually
+0) Calculate blur and set threshold value to 0.4 (Done)
+1) Pickle the labels (Done)
+2) Use predict prob to get the confidence and then choose the corresponding label (Done)
+3) Determine accuracy manually (In progress)
 
 Stage 2:
 1) Divide SVMs into n individual models
-2) Save n labels to determine accuracy
+2) Calculate face angle based on face coordinates
+3) Save n labels to determine accuracy
 
 Stage 3:
 1) Compare accuracies and results
