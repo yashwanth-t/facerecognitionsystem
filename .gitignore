@@ -2,3 +2,4 @@
 testing/
 training/
 output/
+__pycache__/

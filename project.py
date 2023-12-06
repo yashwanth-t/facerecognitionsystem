@@ -7,6 +7,11 @@ import sys
 from face_recognition import face_locations, face_encodings
 from cv2 import Laplacian, cvtColor, COLOR_BGR2GRAY, CV_64F, imshow, waitKey, cvtColor, COLOR_BGR2LAB, split
 
+
+
+def find_clarity(image):
+    return Laplacian(cvtColor(image, COLOR_BGR2GRAY), CV_64F).var()
+
 def extract_frames(video_path):
     frames = []
     cap = cv2.VideoCapture(video_path)
@@ -24,9 +29,6 @@ def extract_frames(video_path):
     cap.release()
     print(f'Extracted {len(frames)} frames from {video_path}.')
     return frames
-
-def find_clarity(image):
-    return Laplacian(cvtColor(image, COLOR_BGR2GRAY), CV_64F).var()
 
 if len(sys.argv) > 1 and sys.argv[1] == 'train':
     X_train = []
@@ -47,6 +49,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'train':
         frames = extract_frames(f'./training/{video_name}')
         for frame in frames:
             face_locs = face_locations(frame)
+            print(face_locs)
 
             skipped_frames = 0
 
@@ -59,7 +62,6 @@ if len(sys.argv) > 1 and sys.argv[1] == 'train':
                 if clarity < 40:
 
                     continue
-
             face_encs = face_encodings(frame, face_locs)
             X_train.extend(face_encs)
             y_train.extend([numeric_label] * len(face_encs))
